@@ -21,7 +21,7 @@ provider "tls" {}
 provider "wireguard" {}
 
 provider "digitalocean" {
-  token = var.digitalocean_token
+  token = var.token
 }
 
 resource "wireguard_asymmetric_key" "client" {}
