@@ -76,12 +76,6 @@ resource "digitalocean_droplet" "this" {
   }
 }
 
-resource "local_file" "ssh_private_key" {
-  sensitive_content = tls_private_key.this.private_key_pem
-  filename = "${local.builddir}/${digitalocean_droplet.this.ipv4_address}/key.pem"
-  file_permission = "0600"
-}
-
 data "wireguard_config_document" "client" {
   private_key = wireguard_asymmetric_key.client.private_key
   addresses = ["10.0.0.2/24"]
@@ -92,10 +86,4 @@ data "wireguard_config_document" "client" {
     allowed_ips = ["0.0.0.0/0"]
     endpoint = "${digitalocean_droplet.this.ipv4_address}:51820"
   }
-}
-
-resource "local_file" "wg_config" {
-  content = data.wireguard_config_document.client.conf
-  filename = "${local.builddir}/${digitalocean_droplet.this.ipv4_address}/wireguard.conf"
-  file_permission = "0644"
 }
