@@ -18,8 +18,6 @@ locals {
 
 provider "tls" {}
 
-provider "local" {}
-
 provider "wireguard" {}
 
 provider "digitalocean" {
