@@ -1,4 +1,4 @@
-variable "digitalocean_token" {
+variable "token" {
   type = string
   description = "The DigitalOcean access token to use for authentication."
   sensitive = true
